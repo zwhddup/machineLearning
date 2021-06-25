@@ -316,8 +316,13 @@ class LSTM(object):
 
 def create_dataset(dataset, look_back=1):
     dataX, dataY = [], []
+    temp = []
     for i in dataset[:-look_back]:
-        dataX.append(numpy.array([i]))
+        for j in i:
+            temp.append([j])
+        dataX.append(numpy.array(temp))
+        temp.clear()
+
     for i in dataset[look_back:]:
         dataY.append(i)
     return dataX, numpy.array(dataY)
